@@ -8,12 +8,14 @@ namespace BangazonWebApp.Models
 {
     public class Computers
     {
+        [Required]
         public int Id { get; set; }
 
         [Display(Name = "Date Purchased")]
-        public DateTime DatePurchased { get; set; }
-        [Display(Name = "Decommissioned Date")]
         [Required]
+        public DateTime DatePurchased { get; set; }
+
+        [Display(Name = "Decommissioned Date")]
         public DateTime DecommissionedDate { get; set; }
         [Display(Name = "Needs Repair?")]
         [Required]
