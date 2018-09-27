@@ -18,12 +18,15 @@ namespace BangazonWebApp.Models
         public string ProgramName { get; set; }
 
         [Required]
+        [Display(Name = "Max Attendees")]
         public int MaxAttendees { get; set; }
 
         [Required]
+        [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
 
         [Required]
+        [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
 
 
