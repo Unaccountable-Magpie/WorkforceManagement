@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Author: Austin Gorman
+//Purpose: To reference the Computers table and the values
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
