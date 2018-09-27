@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="dapper" Version="1.50.5" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
