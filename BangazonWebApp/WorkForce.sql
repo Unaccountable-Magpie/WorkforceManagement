@@ -1,6 +1,3 @@
-
-																																																																																																																																
-
 ALTER TABLE EmployeeComputers DROP CONSTRAINT [FK_Employees];
 ALTER TABLE EmployeeComputers DROP CONSTRAINT [FK_Computers];
 
@@ -52,7 +49,7 @@ DROP TABLE IF EXISTS ProductOrders;
 CREATE TABLE Computers (
     Id    INTEGER NOT NULL PRIMARY KEY IDENTITY,
     DatePurchased    DATE NOT NULL,
-    DecommissionedDate    DATE,
+    DecommissionedDate    DATE NOT NULL,
     Malfunctioned BIT NOT NULL
 );
 
@@ -223,11 +220,8 @@ CREATE TABLE PaymentTypes (
     AccountNumber INTEGER NOT NULL,
 	CustomersId INTEGER NOT NULL,
     CONSTRAINT FK_Customers FOREIGN KEY(CustomersId) REFERENCES Customers(Id),
-<<<<<<< HEAD
 	IsDeleted BIT NOT NULL
 
-=======
->>>>>>> master
 );
 
 INSERT INTO PaymentTypes
