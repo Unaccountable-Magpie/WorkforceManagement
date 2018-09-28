@@ -1,6 +1,7 @@
 ﻿//Author: Lauren Richert
 //Purpose: To reference the Employees table and the values
 
+using BangazonWebApp.Controllers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,17 +23,19 @@ namespace BangazonWebApp.Models
         public string LastName { get; set; }
 
         [Required]
+        [Display(Name = "Is Supervisor")]
+        public bool Supervisor { get; set; }
+
+        [Required]
         [Display(Name = "Department")]
         public int DepartmentsId { get; set; }
+        public Departments Departments { get; set; }
 
         [Required]
-        [Display(Name = "Assigned Computer")]
-        public int ComputersId { get; set; }
+        [Display(Name = "Current Computer")]
+        public Computers Computers { get; set; }
 
-        [Required]
-        [Display(Name = "Training Programs")]
-        public int TrainingProgramsId { get; set; }
-
+      
         public List<TrainingPrograms> TrainingPrograms { get; set; } = new List<TrainingPrograms>();
 
 
