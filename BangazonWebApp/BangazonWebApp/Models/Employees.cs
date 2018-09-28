@@ -22,6 +22,10 @@ namespace BangazonWebApp.Models
         public string LastName { get; set; }
 
         [Required]
+        [Display(Name = "Department")]
+        public int DepartmentsId { get; set; }
+
+        [Required]
         [Display(Name = "Assigned Computer")]
         public int ComputersId { get; set; }
 
