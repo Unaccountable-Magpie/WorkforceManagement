@@ -5,14 +5,16 @@ using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
+using BangazonWebApp.Controllers;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Workforce.Controllers
 {
-    public class DepartmentController : Controller
+    public class DepartmentsController : Controller
     {
         private readonly IConfiguration _config;
 
-        public DepartmentController(IConfiguration config)
+        public DepartmentsController(IConfiguration config)
         {
             _config = config;
         }
@@ -25,7 +27,7 @@ namespace Workforce.Controllers
             }
         }
 
-        
+
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -39,38 +41,38 @@ namespace Workforce.Controllers
                 s.Id,
                 s.Name,
                 s.Budget,                
-            from Department s
+            from Departments s
             WHERE s.Id = {id}";
 
             using (IDbConnection conn = Connection)
             {
 
-                Department department = (await conn.QueryAsync<Department>(sql)).ToList().Single();
+                Departments departments = (await conn.QueryAsync<Departments>(sql)).ToList().Single();
 
-                if (department == null)
+                if (departments == null)
                 {
                     return NotFound();
                 }
 
-                return View(department);
+                return View(departments);
             }
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Department department)
+        public async Task<IActionResult> Post([Bind ("DepartmentId, Name, Budget")]Departments departments)
         {
 
             if (ModelState.IsValid)
             {
                 string sql = $@"
-                    INSERT INTO Department
+                    INSERT INTO Departments
                         ( Name, Budget)
                         VALUES
-                        ( 
-                             '{department.Name}'
-                            , '{department.Budget}'
+                        ( null,
+                             '{departments.Name}'
+                            , '{departments.Budget}'
                             
                         )
                     ";
@@ -86,6 +88,7 @@ namespace Workforce.Controllers
                 }
             }
 
+            return View(departments);
 
         }
 
