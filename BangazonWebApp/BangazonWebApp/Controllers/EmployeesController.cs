@@ -64,9 +64,9 @@ namespace BangazonWebApp.Controllers
         public async Task<IActionResult> Post([FromBody] Employees Employees)
         {
             string sql = $@"INSERT INTO Employees
-            ( FirstName, LastName, ComputersId, DepartmentsId, TrainingProgramsId)
+            ( FirstName, LastName, DepartmentsId, ComputersId, TrainingProgramsId)
             VALUES
-            ('{Employees.FirstName}','{Employees.LastName}', '{Employees.ComputersId}', '{Employees.DepartmentsId}',
+            ('{Employees.FirstName}','{Employees.LastName}', '{Employees.DepartmentsId}', '{Employees.ComputersId}', 
         {Employees.TrainingProgramsId});
             select MAX(Id) from Employees";
 
@@ -85,11 +85,11 @@ namespace BangazonWebApp.Controllers
             string sql = $@"
             UPDATE Employees
             SET 
-                DepartmentsId = {Employees.DepartmentsId},
-                TrainingProgramsId = {Employees.TrainingProgramsId},
                 FirstName = '{Employees.FirstName}',
                 LastName = '{Employees.LastName}',
-                ComputersId = '{Employees.ComputersId}'
+                DepartmentsId = {Employees.DepartmentsId},
+                ComputersId = '{Employees.ComputersId},
+                TrainingProgramsId = {Employees.TrainingProgramsId}
             WHERE Id = {id}";
 
             try
