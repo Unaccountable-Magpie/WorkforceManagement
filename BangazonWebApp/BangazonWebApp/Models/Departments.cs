@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿//Authored By: Michael Roberts
+//Purpose: The Departments model will allow a user to pull up a list of Departments.
+
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -17,7 +20,7 @@ namespace BangazonWebApp.Controllers
         [Required]
         public string Budget { get; set; }
 
-        List<Employees> EmployeeList = new List<Employees>();
+        List<Employees> EmployeesList = new List<Employees>();
 
     }
 
