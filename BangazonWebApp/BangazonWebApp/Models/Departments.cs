@@ -17,7 +17,7 @@ namespace BangazonWebApp.Controllers
         [Required]
         public string Budget { get; set; }
 
-        List<Employees> EmployeeList = new List<Employees>();
+        //List<Employees> EmployeeList = new List<Employees>();
 
     }
 
