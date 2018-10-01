@@ -37,14 +37,19 @@ namespace Workforce.Controllers
             }
 
             string sql = $@"
-            select
-                s.Id,
-                s.Name,
-                s.Budget,                
-            from Departments s
-            WHERE s.Id = {id}";
-
+           Select
+               d.Id,
+               d.Name,
+               d.Budget,
+               e.FirstName,
+               e.LastName,
+               e.DepartmentsId
+            from Departments d
+			JOIN Employees e ON d.Id = e.DepartmentsId;
+            ";
             using (IDbConnection conn = Connection)
+
+            
             {
 
                 Departments departments = (await conn.QueryAsync<Departments>(sql)).ToList().Single();
