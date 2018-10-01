@@ -32,6 +32,45 @@ namespace BangazonWebApp.Controllers
             }
         }
 
+        public async Task<IActionResult> Index()
+        {
+
+            string sql = @"
+            select
+                e.Id,
+                e.FirstName,
+                e.LastName,
+                d.Id,
+                d.Name
+            from Employees e, Departments d
+            join Departments on e.DepartmentsId = d.Id
+        ";
+
+            using (IDbConnection conn = Connection)
+            {
+                Dictionary<int, Employees> employeeList = new Dictionary<int, Employees>();
+
+                var EmployeeQuerySet = await conn.QueryAsync<Employees, Departments, Employees>(
+                        sql,
+                        (employee, department) => {
+                            if (!employeeList.ContainsKey(employee.Id))
+                            {
+                                employeeList[employee.Id] = employee;
+                            }
+                            employeeList[employee.Id].Departments = department;
+                            return employee;
+                        }
+                    );
+                return View(employeeList);
+
+            }
+        }
+
+        private IActionResult View(Dictionary<int, Employees> employeeList)
+        {
+            throw new NotImplementedException();
+        }
+
         // GET: api/Employees/5
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -64,10 +103,9 @@ namespace BangazonWebApp.Controllers
         public async Task<IActionResult> Post([FromBody] Employees Employees)
         {
             string sql = $@"INSERT INTO Employees
-            ( FirstName, LastName, DepartmentsId, ComputersId, TrainingProgramsId)
+            ( FirstName, LastName, Supervisor, DepartmentsId, Computers )
             VALUES
-            ('{Employees.FirstName}','{Employees.LastName}', '{Employees.DepartmentsId}', '{Employees.ComputersId}', 
-        {Employees.TrainingProgramsId});
+            ('{Employees.FirstName}','{Employees.LastName}', '{Employees.Supervisor}', '{Employees.DepartmentsId}', '{Employees.Computers}' );
             select MAX(Id) from Employees";
 
             using (IDbConnection conn = Connection)
@@ -78,72 +116,6 @@ namespace BangazonWebApp.Controllers
             }
 
         }
-        // PUT: api/Employees/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] Employees Employees)
-        {
-            string sql = $@"
-            UPDATE Employees
-            SET 
-                FirstName = '{Employees.FirstName}',
-                LastName = '{Employees.LastName}',
-                DepartmentsId = {Employees.DepartmentsId},
-                ComputersId = '{Employees.ComputersId},
-                TrainingProgramsId = {Employees.TrainingProgramsId}
-            WHERE Id = {id}";
-
-            try
-            {
-                using (IDbConnection conn = Connection)
-                {
-                    int rowsAffected = await conn.ExecuteAsync(sql);
-                    if (rowsAffected > 0)
-                    {
-                        return new StatusCodeResult(StatusCodes.Status204NoContent);
-                    }
-                    throw new Exception("No rows affected");
-                }
-            }
-            catch (Exception)
-            {
-                if (!EmployeesExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-        }
-
-
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
-        {
-            string sql = $@"DELETE FROM EmployeeComputers WHERE EmployeesId = {id};
-               DELETE FROM Employees WHERE Id = {id}";
-
-            using (IDbConnection conn = Connection)
-            {
-                int rowsAffected = await conn.ExecuteAsync(sql);
-                if (rowsAffected > 0)
-                {
-                    return new StatusCodeResult(StatusCodes.Status204NoContent);
-                }
-                throw new Exception("No rows affected");
-            }
-
-        }
-        private bool EmployeesExists(int id)
-        {
-            string sql = $"SELECT DepartmentsId, FirstName, LastName, Supervisor FROM Employees WHERE Id = {id}";
-            using (IDbConnection conn = Connection)
-            {
-                return conn.Query<Employees>(sql).Count() > 0;
-            }
-        }
+        
     }
 }
