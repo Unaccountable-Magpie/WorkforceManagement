@@ -1,22 +1,20 @@
-﻿@model BangazonWebApp.Controllers.Departments
+﻿@*//Author: Austin Gorman
+//Purpose: Makes a view for creating new Departments with the controller*@
+
+
+@model BangazonWebApp.Controllers.Departments
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create New Department";
 }
 
-<h2>Create</h2>
 
-<h4>Departments</h4>
+<h4>@ViewData["Title"]</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
