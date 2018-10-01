@@ -1,6 +1,5 @@
-﻿//Authored By: Michael Roberts
-//Purpose: The Departments model will allow a user to pull up a list of Departments.
 
+using BangazonWebApp.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
