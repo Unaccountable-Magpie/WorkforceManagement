@@ -226,19 +226,19 @@ CREATE TABLE PaymentTypes (
 );
 
 INSERT INTO PaymentTypes
-(Name, AccountNumber, CustomersId, IsDeleted)
+(Name, AccountNumber, CustomersId)
 VALUES
-('Visa', 3324, 2, 0);
+('Visa', 3324, 2);
 
 INSERT INTO PaymentTypes
-(Name, AccountNumber, CustomersId, IsDeleted)
+(Name, AccountNumber, CustomersId)
 VALUES
-('MasterCard', 3327, 1, 0);
+('MasterCard', 3327, 1);
 
 INSERT INTO PaymentTypes
-(Name, AccountNumber, CustomersId, IsDeleted)
+(Name, AccountNumber, CustomersId)
 VALUES
-('PayPal', 3301, 3, 0);
+('PayPal', 3301, 3);
 
 CREATE TABLE Orders (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
