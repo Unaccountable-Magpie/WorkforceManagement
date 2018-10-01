@@ -14,8 +14,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 namespace BangazonWebApp.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class EmployeesController : ControllerBase
+    public class EmployeesController : Controller
     {
         private readonly IConfiguration _config;
 
@@ -36,14 +35,15 @@ namespace BangazonWebApp.Controllers
         {
 
             string sql = @"
-            select
+           select
                 e.Id,
                 e.FirstName,
                 e.LastName,
-                d.Id,
-                d.Name
-            from Employees e, Departments d
-            join Departments on e.DepartmentsId = d.Id
+                e.DepartmentsId,
+				d.Id,
+				d.Name
+            from Employees e
+			JOIN Departments d ON e.DepartmentsId = d.Id;
         ";
 
             using (IDbConnection conn = Connection)
@@ -52,7 +52,8 @@ namespace BangazonWebApp.Controllers
 
                 var EmployeeQuerySet = await conn.QueryAsync<Employees, Departments, Employees>(
                         sql,
-                        (employee, department) => {
+                        (employee, department) =>
+                        {
                             if (!employeeList.ContainsKey(employee.Id))
                             {
                                 employeeList[employee.Id] = employee;
@@ -61,29 +62,13 @@ namespace BangazonWebApp.Controllers
                             return employee;
                         }
                     );
-                return View(employeeList);
+                return View(employeeList.Values);
 
             }
         }
 
-        private IActionResult View(Dictionary<int, Employees> employeeList)
-        {
-            throw new NotImplementedException();
-        }
 
-        // GET: api/Employees/5
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            using (IDbConnection conn = Connection)
-            {
-                string sql = "SELECT * FROM Employees";
 
-                var AllEmployees = await conn.QueryAsync<Employees>(sql);
-                return Ok(AllEmployees);
-            }
-
-        }
 
         //get a single employee
         [HttpGet("{id}", Name = "GetEmployees")]
@@ -116,6 +101,6 @@ namespace BangazonWebApp.Controllers
             }
 
         }
-        
+
     }
 }
