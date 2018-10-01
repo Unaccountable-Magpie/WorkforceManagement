@@ -23,14 +23,8 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+            <a asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
             </td>
-            <a asp-action="Details" asp-route-id="@item.Id">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-            </a>
-
         </tr>
 }
     </tbody>
