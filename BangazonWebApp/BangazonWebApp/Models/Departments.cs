@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+
+using BangazonWebApp.Models;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -17,7 +19,8 @@ namespace BangazonWebApp.Controllers
         [Required]
         public string Budget { get; set; }
 
-        //List<Employees> EmployeeList = new List<Employees>();
+
+        List<Employees> EmployeesList = new List<Employees>();
 
     }
 
