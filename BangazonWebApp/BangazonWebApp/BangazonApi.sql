@@ -223,6 +223,7 @@ CREATE TABLE PaymentTypes (
     AccountNumber INTEGER NOT NULL,
 	CustomersId INTEGER NOT NULL,
     CONSTRAINT FK_Customers FOREIGN KEY(CustomersId) REFERENCES Customers(Id),
+
 );
 
 INSERT INTO PaymentTypes
