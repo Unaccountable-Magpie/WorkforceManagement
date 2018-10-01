@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using BangazonWebApp.Controllers;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Collections.Generic;
 
 namespace Workforce.Controllers
 {
@@ -27,7 +28,16 @@ namespace Workforce.Controllers
             }
         }
 
-
+        public async Task<IActionResult> Index()
+        {
+            using (IDbConnection conn = Connection)
+            {
+                IEnumerable<Departments> departments = await conn.QueryAsync<Departments>(
+                    "SELECT id, Name FROM Departments;"
+                );
+                return View(departments);
+            }
+        }
 
         public async Task<IActionResult> Details(int? id)
         {
