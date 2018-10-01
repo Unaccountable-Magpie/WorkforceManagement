@@ -27,7 +27,11 @@ namespace Workforce.Controllers
             }
         }
 
-
+        // GET: Employee/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -47,12 +51,9 @@ namespace Workforce.Controllers
             from Departments d
 			JOIN Employees e ON d.Id = e.DepartmentsId;
             ";
-            using (IDbConnection conn = Connection)
+            using (IDbConnection conn = Connection){
 
-            
-            {
-
-                Departments departments = (await conn.QueryAsync<Departments>(sql)).ToList().Single();
+                Departments departments = (await conn.QueryAsync<Departments> (sql)).ToList().Single();
 
                 if (departments == null)
                 {
