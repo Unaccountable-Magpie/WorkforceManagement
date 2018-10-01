@@ -67,6 +67,41 @@ namespace BangazonWebApp.Controllers
             }
         }
 
+        //details view
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            string sql = $@"
+            select
+                s.Id,
+                s.FirstName,
+                s.LastName,
+                s.Supervisor
+                d.DeparmentId
+                c.Computers
+            from Employee s
+            from Departments d
+            from Computers c
+            WHERE s.Id = {id}";
+
+            using (IDbConnection conn = Connection)
+            {
+
+                Employees employee = (await conn.QueryAsync<Employees>(sql)).ToList().Single();
+
+                if (employee == null)
+                {
+                    return NotFound();
+                }
+
+                return View(employee);
+            }
+        }
 
 
 
