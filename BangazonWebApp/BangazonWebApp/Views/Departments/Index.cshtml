@@ -1,4 +1,7 @@
-﻿@model IEnumerable<BangazonWebApp.Controllers.Departments>
+﻿@*//Author: Austin Gorman
+    //Purpose: Makes a view for displaying a list of Departments*@
+
+@model IEnumerable<BangazonWebApp.Controllers.Departments>
 
 @{
     ViewData["Title"] = "Departments";
@@ -20,12 +23,13 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-            <a asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
