@@ -21,7 +21,7 @@ namespace BangazonWebApp.Controllers
 
 
 
-        List<Employees> EmployeesList = new List<Employees>();
+       public List<Employees> EmployeesList = new List<Employees>();
 
 
     }

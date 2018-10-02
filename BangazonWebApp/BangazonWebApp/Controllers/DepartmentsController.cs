@@ -66,7 +66,7 @@ namespace Workforce.Controllers
                 var departmentsDictionary = new Dictionary<int, Departments>();
 
 
-                var list = conn.Query<Departments, Employees, Departments>(
+                var list = await conn.QueryAsync<Departments, Employees, Departments>(
                 sql,
                 (departments, employees) =>
                 {
