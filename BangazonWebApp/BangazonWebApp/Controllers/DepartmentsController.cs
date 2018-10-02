@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using BangazonWebApp.Controllers;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Collections.Generic;
+using BangazonWebApp.Models;
 
 namespace Workforce.Controllers
 {
@@ -28,11 +29,6 @@ namespace Workforce.Controllers
             }
         }
 
-
-        // GET: Employee/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
 
         public async Task<IActionResult> Index()
         {
@@ -64,16 +60,30 @@ namespace Workforce.Controllers
             from Departments d
 			JOIN Employees e ON d.Id = e.DepartmentsId;
             ";
-            using (IDbConnection conn = Connection){
+            using (IDbConnection conn = Connection)
+            {
 
-                Departments departments = (await conn.QueryAsync<Departments> (sql)).ToList().Single();
+                var departmentsDictionary = new Dictionary<int, Departments>();
 
-                if (departments == null)
+
+                var list = conn.Query<Departments, Employees, Departments>(
+                sql,
+                (departments, employees) =>
                 {
-                    return NotFound();
-                }
+                    Departments departmentsEntry;
 
-                return View(departments);
+                    if (!departmentsDictionary.TryGetValue(departments.Id, out departmentsEntry))
+                    {
+                        departmentsEntry = departments;
+                        departmentsEntry.EmployeesList = new List<Employees>();
+                        departmentsDictionary.Add(departmentsEntry.Id, departmentsEntry);
+                    }
+
+                    departmentsEntry.EmployeesList.Add(employees);
+                    return departmentsEntry;
+
+                });
+                return View(list.Distinct().First());
             }
         }
 
