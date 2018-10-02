@@ -35,16 +35,16 @@ namespace BangazonWebApp.Controllers
         {
 
             string sql = @"
-           select
-                e.Id,
-                e.FirstName,
-                e.LastName,
-                e.DepartmentsId,
-				d.Id,
-				d.Name
-            from Employees e
-			JOIN Departments d ON e.DepartmentsId = d.Id;
-        ";
+                select
+                     e.Id,
+                     e.FirstName,
+                     e.LastName,
+                     e.DepartmentsId,
+        	d.Id,
+        	d.Name
+                 from Employees e
+        JOIN Departments d ON e.DepartmentsId = d.Id;
+             ";
 
             using (IDbConnection conn = Connection)
             {
@@ -69,24 +69,21 @@ namespace BangazonWebApp.Controllers
 
         //details view
 
+
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            
 
             string sql = $@"
             select
                 s.Id,
                 s.FirstName,
                 s.LastName,
-                s.Supervisor
                 d.DeparmentId
                 c.Computers
             from Employee s
-            from Departments d
-            from Computers c
+            JOIN Departments d ON s.DepartmentId = d.Id
+            
             WHERE s.Id = {id}";
 
             using (IDbConnection conn = Connection)

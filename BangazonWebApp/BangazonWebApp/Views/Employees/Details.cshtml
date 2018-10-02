@@ -1,0 +1,45 @@
+﻿@model BangazonWebApp.Models.Employees
+@{
+    ViewData["Title"] = "Employee Details";
+}
+<h2>@ViewData["Title"]</h2>
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @*@Html.DisplayFor(model => model.FirstName)*@
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @*@Html.DisplayFor(model => model.LastName)*@
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Departments)
+        </dt>
+        <dd>
+            @*@Html.DisplayFor(model => model.Departments)*@
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Computers)
+        </dt>
+        <dd>
+            @*@Html.DisplayFor(model => model.Computers)*@
+        </dd>
+    </dl>
+</div>
+<div>
+    
+    <a asp-action="Index">Back to List</a>
+</div>
