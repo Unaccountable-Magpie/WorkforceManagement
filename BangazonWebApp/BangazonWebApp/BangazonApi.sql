@@ -118,6 +118,11 @@ INSERT INTO Employees
 VALUES
 ('Jesus', 'Sanchez', 1, 3 );
 
+INSERT INTO Employees
+(FirstName, LastName, Supervisor, DepartmentsId )
+VALUES
+('Joey', 'Ramone', 1, 2 );
+
 CREATE TABLE TrainingPrograms (
     Id  INTEGER NOT NULL PRIMARY KEY IDENTITY,
     ProgramName  varchar(80) NOT NULL,
