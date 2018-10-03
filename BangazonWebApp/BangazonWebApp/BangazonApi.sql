@@ -106,7 +106,7 @@ CREATE TABLE Employees (
 INSERT INTO Employees
 (FirstName, LastName, Supervisor, DepartmentsId )
 VALUES
-('Jose', 'Ramirez', 1, 1 );
+('Jose', 'Ramirez', 1, 2 );
 
 INSERT INTO Employees
 (FirstName, LastName, Supervisor, DepartmentsId )
