@@ -10,7 +10,9 @@ WorkforceManagement is an app to keep track of your Employees, and Departments i
 
 **How to test (Be thorough!):
 
-Checkout to my branch jr-views
+Clone into repo
+
+Cd into WorkforceManagement/BangazonWebApp
 
 type start BangazonWebApp.sln
 
@@ -20,6 +22,6 @@ Press IIS Express play button to start up the server, a window will open inside 
 
 You can select Details and it will bring you the specific details of the object you chose.
 
-You can select Edit and it will bring up an edit form to change details of the object you chose.
+
 
 
