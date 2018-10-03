@@ -38,7 +38,7 @@ namespace Workforce.Controllers
             using (IDbConnection conn = Connection)
             {
                 IEnumerable<Departments> departments = await conn.QueryAsync<Departments>(
-                    "SELECT id, Name FROM Departments;"
+                    "SELECT Id, Name FROM Departments;"
                 );
                 return View(departments);
             }
@@ -62,7 +62,8 @@ namespace Workforce.Controllers
                e.LastName,
                e.DepartmentsId
             from Departments d
-			JOIN Employees e ON d.Id = e.DepartmentsId;
+			JOIN Employees e ON d.Id = e.DepartmentsId
+            WHERE d.Id = {id}
             ";
             using (IDbConnection conn = Connection)
             {
