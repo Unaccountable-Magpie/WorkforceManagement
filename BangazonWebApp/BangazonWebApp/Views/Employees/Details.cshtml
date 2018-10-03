@@ -11,7 +11,7 @@
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
         <dd>
-            @*@Html.DisplayFor(model => model.FirstName)*@
+            @Html.DisplayFor(model => model.FirstName)
         </dd>
     </dl>
     <dl class="dl-horizontal">
@@ -19,7 +19,7 @@
             @Html.DisplayNameFor(model => model.LastName)
         </dt>
         <dd>
-            @*@Html.DisplayFor(model => model.LastName)*@
+            @Html.DisplayFor(model => model.LastName)
         </dd>
     </dl>
     <dl class="dl-horizontal">
@@ -27,7 +27,10 @@
             @Html.DisplayNameFor(model => model.Departments)
         </dt>
         <dd>
-            @*@Html.DisplayFor(model => model.Departments)*@
+            @Html.DisplayFor(model => model.Departments.Name)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Departments.Budget)
         </dd>
     </dl>
     <dl class="dl-horizontal">
@@ -35,9 +38,20 @@
             @Html.DisplayNameFor(model => model.Computers)
         </dt>
         <dd>
-            @*@Html.DisplayFor(model => model.Computers)*@
+            @Html.DisplayFor(model => model.Computers)
         </dd>
-    </dl>
+            <dl class="dl-horizontal">
+                <dt>
+                    Training Program
+                </dt>
+        @foreach (var item in Model.TrainingPrograms)
+        {
+                <dd>
+                    @item.ProgramName
+                </dd>
+                }
+
+            </dl>
 </div>
 <div>
     

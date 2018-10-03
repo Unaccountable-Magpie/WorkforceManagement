@@ -33,7 +33,9 @@ namespace BangazonWebApp.Models
 
         [Required]
         [Display(Name = "Current Computer")]
+        public int ComputersId { get; set; }
         public Computers Computers { get; set; }
+
 
       
         public List<TrainingPrograms> TrainingPrograms { get; set; } = new List<TrainingPrograms>();
