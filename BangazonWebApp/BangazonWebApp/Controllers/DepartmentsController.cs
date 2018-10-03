@@ -1,4 +1,7 @@
-﻿using System.Data;
+﻿//Author: Michael Roberts
+//Purpose: To list the employees to their departments when you select the Details of the Departments.
+
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
@@ -54,6 +57,7 @@ namespace Workforce.Controllers
                d.Id,
                d.Name,
                d.Budget,
+               e.Id,
                e.FirstName,
                e.LastName,
                e.DepartmentsId
