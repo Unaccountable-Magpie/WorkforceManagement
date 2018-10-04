@@ -93,9 +93,15 @@ namespace Workforce.Controllers
         }
 
 
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Post([Bind ("DepartmentId, Name, Budget")]Departments departments)
+        public async Task<IActionResult>Create([Bind ("Name, Budget")]Departments departments)
         {
 
             if (ModelState.IsValid)
@@ -104,8 +110,7 @@ namespace Workforce.Controllers
                     INSERT INTO Departments
                         ( Name, Budget)
                         VALUES
-                        ( null,
-                             '{departments.Name}'
+                        ( '{departments.Name}'
                             , '{departments.Budget}'
                             
                         )
