@@ -15,15 +15,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Id)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DatePurchased)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DecommissionedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Malfunctioned)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -32,15 +23,6 @@
         <tr>
             <td>
                 <a asp-action="Details" asp-route-id="@item.Id">@item.Id</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DatePurchased)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DecommissionedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Malfunctioned)
             </td>
             <td>
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
