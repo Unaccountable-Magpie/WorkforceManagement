@@ -62,7 +62,7 @@ namespace Workforce.Controllers
                e.LastName,
                e.DepartmentsId
             from Departments d
-			JOIN Employees e ON d.Id = e.DepartmentsId
+			LEFT JOIN Employees e ON d.Id = e.DepartmentsId
             WHERE d.Id = {id}
             ";
             using (IDbConnection conn = Connection)
@@ -83,8 +83,10 @@ namespace Workforce.Controllers
                         departmentsEntry.EmployeesList = new List<Employees>();
                         departmentsDictionary.Add(departmentsEntry.Id, departmentsEntry);
                     }
-
+                    if (employees !=null)
+                    { 
                     departmentsEntry.EmployeesList.Add(employees);
+                    }
                     return departmentsEntry;
 
                 });
