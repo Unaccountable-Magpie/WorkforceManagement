@@ -1,4 +1,7 @@
-﻿using System.Data;
+﻿//Author: Michael Roberts
+//Purpose: To list the employees to their departments when you select the Details of the Departments.
+
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
@@ -8,6 +11,7 @@ using System.Data.SqlClient;
 using BangazonWebApp.Controllers;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Collections.Generic;
+using BangazonWebApp.Models;
 
 namespace Workforce.Controllers
 {
@@ -28,15 +32,17 @@ namespace Workforce.Controllers
             }
         }
 
+
         public async Task<IActionResult> Index()
         {
             using (IDbConnection conn = Connection)
             {
                 IEnumerable<Departments> departments = await conn.QueryAsync<Departments>(
-                    "SELECT id, Name FROM Departments;"
+                    "SELECT Id, Name FROM Departments;"
                 );
                 return View(departments);
             }
+
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -47,24 +53,44 @@ namespace Workforce.Controllers
             }
 
             string sql = $@"
-            select
-                s.Id,
-                s.Name,
-                s.Budget,                
-            from Departments s
-            WHERE s.Id = {id}";
-
+           Select
+               d.Id,
+               d.Name,
+               d.Budget,
+               e.Id,
+               e.FirstName,
+               e.LastName,
+               e.DepartmentsId
+            from Departments d
+			LEFT JOIN Employees e ON d.Id = e.DepartmentsId
+            WHERE d.Id = {id}
+            ";
             using (IDbConnection conn = Connection)
             {
 
-                Departments departments = (await conn.QueryAsync<Departments>(sql)).ToList().Single();
+                var departmentsDictionary = new Dictionary<int, Departments>();
 
-                if (departments == null)
+
+                var list = await conn.QueryAsync<Departments, Employees, Departments>(
+                sql,
+                (departments, employees) =>
                 {
-                    return NotFound();
-                }
+                    Departments departmentsEntry;
 
-                return View(departments);
+                    if (!departmentsDictionary.TryGetValue(departments.Id, out departmentsEntry))
+                    {
+                        departmentsEntry = departments;
+                        departmentsEntry.EmployeesList = new List<Employees>();
+                        departmentsDictionary.Add(departmentsEntry.Id, departmentsEntry);
+                    }
+                    if (employees !=null)
+                    { 
+                    departmentsEntry.EmployeesList.Add(employees);
+                    }
+                    return departmentsEntry;
+
+                });
+                return View(list.Distinct().First());
             }
         }
 

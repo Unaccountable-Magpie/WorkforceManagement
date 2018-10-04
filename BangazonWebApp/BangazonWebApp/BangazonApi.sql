@@ -106,7 +106,7 @@ CREATE TABLE Employees (
 INSERT INTO Employees
 (FirstName, LastName, Supervisor, DepartmentsId )
 VALUES
-('Jose', 'Ramirez', 1, 1 );
+('Jose', 'Ramirez', 1, 2 );
 
 INSERT INTO Employees
 (FirstName, LastName, Supervisor, DepartmentsId )
@@ -117,6 +117,11 @@ INSERT INTO Employees
 (FirstName, LastName, Supervisor, DepartmentsId )
 VALUES
 ('Jesus', 'Sanchez', 1, 3 );
+
+INSERT INTO Employees
+(FirstName, LastName, Supervisor, DepartmentsId )
+VALUES
+('Joey', 'Ramone', 1, 2 );
 
 CREATE TABLE TrainingPrograms (
     Id  INTEGER NOT NULL PRIMARY KEY IDENTITY,
