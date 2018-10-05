@@ -53,23 +53,25 @@ CREATE TABLE Computers (
     Id    INTEGER NOT NULL PRIMARY KEY IDENTITY,
     DatePurchased    DATE NOT NULL,
     DecommissionedDate    DATE,
-    Malfunctioned BIT NOT NULL
+    Malfunctioned BIT NOT NULL,
+	Manufacturer varchar(80) NOT NULL,
+	Make varchar(80) NOT NULL
 );
 
 INSERT INTO Computers
-(DatePurchased, DecommissionedDate, Malfunctioned)
+(DatePurchased, DecommissionedDate, Malfunctioned, Manufacturer, Make)
 VALUES
-('2005-7-7', '2004-6-6', 0 );
+('2005-7-7', '2004-6-6', 0, 'Dell', 'V238' );
 
 INSERT INTO Computers
-(DatePurchased, DecommissionedDate, Malfunctioned )
+(DatePurchased, DecommissionedDate, Malfunctioned, Manufacturer, Make)
 VALUES
-('2008-7-7', '2009-6-6', 1 );
+('2008-7-7', '2009-6-6', 1, 'Apple', 'CoolBookPro C# Edition');
 
 INSERT INTO Computers
-(DatePurchased, DecommissionedDate, Malfunctioned )
+(DatePurchased, DecommissionedDate, Malfunctioned, Manufacturer, Make)
 VALUES
-('2010-8-7', '2010-8-6', 0 );
+('2010-8-7', '2010-8-6', 0, 'Apple', 'Dongle+' );
 
 CREATE TABLE Departments (
     Id  INTEGER NOT NULL PRIMARY KEY IDENTITY,
@@ -342,4 +344,4 @@ INSERT INTO ProductOrders
 VALUES
 (1, 2);
 
-SELECT * FROM Orders;
+SELECT * FROM Computers;

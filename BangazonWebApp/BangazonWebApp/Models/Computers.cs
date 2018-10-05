@@ -21,6 +21,11 @@ namespace BangazonWebApp.Models
 
         [Display(Name = "Decommissioned Date")]
         public DateTime DecommissionedDate { get; set; }
+
+        public String Manufacturer { get; set; }
+
+        public String Make { get; set; }
+
         [Display(Name = "Needs Repair?")]
         [Required]
         public bool Malfunctioned { get; set; }
